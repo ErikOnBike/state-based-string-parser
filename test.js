@@ -232,9 +232,13 @@ function parseNextFloatValue(string, from) {
 	return (new Parser(floatStates)).parse(string, from);
 }
 
-tape("parse floats", function(test) {
+tape("parse empty", function(test) {
 	test.deepEqual((new Parser(floatStates)).parse(), { value: undefined, index: 0, errorCode: "MISSING_VALUE" }, "Fail parse <>");
 	test.deepEqual(parseNextFloatValue(""), { value: undefined, index: 0, errorCode: "MISSING_VALUE" }, "Fail parse <>");
+	test.end();
+});
+
+tape("parse floats", function(test) {
 	test.deepEqual(parseNextFloatValue("   "), { value: undefined, index: 3, errorCode: "MISSING_VALUE" }, "Fail parse <   >");
 	test.deepEqual(parseNextFloatValue("   123   "), { value: 123, index: 9 }, "Parse <   123   >");
 	test.deepEqual(parseNextFloatValue("   123.456   "), { value: 123.456, index: 13 }, "Parse <   123.456   >");
@@ -243,5 +247,21 @@ tape("parse floats", function(test) {
 	test.deepEqual(parseNextFloatValue("   0x16   "), { value: 22, index: 10 }, "Parse <   0x16   >");
 	test.deepEqual(parseNextFloatValue("   0x16g   "), { value: 22, index: 7 }, "Parse <   0x16g   >");
 	test.deepEqual(parseNextFloatValue("   0x17   "), { value: undefined, index: 7, errorCode: "HEX_VALUE_NOT_EVEN" }, "Parse <   0x17   >");
+	test.end();
+});
+
+tape("parse repeatedly", function(test) {
+	var parser = new Parser(floatStates);
+	test.deepEqual(parser.parse("987.654"), { value: 987.654, index: 7 }, "Parse <987.654>");
+	var inputString = "1,2,3,4";
+	var parseResult = null;
+	for(var i = 1; i <= 4; i++) {
+		if(i === 1) {
+			parseResult = parser.parse(inputString);
+		} else {
+			parseResult = parser.parse(inputString, parseResult.index + 1);
+		}
+		test.equals(parseResult.value, i, "Parse <1,2,3,4> @ index " + i);
+	}
 	test.end();
 });

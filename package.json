@@ -1,6 +1,6 @@
 {
   "name": "state-based-string-parser",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parse value from string using state based parser and accepting partial match.",
   "keywords": [
     "parser",

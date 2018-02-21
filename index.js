@@ -89,7 +89,7 @@ module.exports = (function() {
 		// Update input (if present)
 		if(arguments.length > 0) {
 			this.input.string = string;
-			this.input.from = from || 0;
+			this.input.index = from || 0;
 			this.input.length = string.length;
 		}
 
