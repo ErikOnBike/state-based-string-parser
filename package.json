@@ -1,6 +1,6 @@
 {
   "name": "state-based-string-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Parse value from string using state based parser and accepting partial match.",
   "keywords": [
     "parser",
@@ -23,11 +23,10 @@
   "scripts": {
     "test": "nyc tape test.js && eslint index.js test.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint": "3",
-    "nyc": "^11.4.1",
-    "tape": "4"
+    "eslint": "^5",
+    "nyc": "^14",
+    "tape": "^4"
   }
 }
