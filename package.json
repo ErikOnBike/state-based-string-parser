@@ -1,6 +1,6 @@
 {
   "name": "state-based-string-parser",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Parse value from string using state based parser and accepting partial match.",
   "keywords": [
     "parser",
@@ -25,7 +25,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "eslint": "^5",
+    "eslint": "^6",
     "nyc": "^14",
     "tape": "^4",
     "lodash": ">=4.17.13"
